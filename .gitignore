@@ -135,5 +135,4 @@ dmypy.json
 # vscode temp folder
 .vscode/
 
-# model
-ocr_model/
+.virtual_documents/
