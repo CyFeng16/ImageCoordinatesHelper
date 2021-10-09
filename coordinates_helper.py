@@ -6,12 +6,22 @@ import cv2
 
 def coordinates_helper(src: str) -> None:
     def on_event_lbuttondown(event, x, y, flags, param):
+        img_x, img_y = img.shape[:2]
         if event == cv2.EVENT_LBUTTONDOWN:
             cv2.circle(img, (x, y), 1, (0, 0, 255), thickness=2)
             cv2.putText(
                 img,
                 f"{x}, {y}",
                 (x, y),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1.0,
+                (0, 0, 0),
+                thickness=2,
+            )
+            cv2.putText(
+                img,
+                f"{x/img_y:.3f}, {y/img_x:.3f}",
+                (x, (round(y + 0.01 * img_y))),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 1.0,
                 (0, 0, 0),
@@ -32,7 +42,7 @@ def coordinates_helper(src: str) -> None:
 
 
 if __name__ == "__main__":
-    img_path = ''
+    img_path = ""
     assert os.path.isfile(img_path) and imghdr.what(img_path) in [
         "tiff",
         "jpeg",
